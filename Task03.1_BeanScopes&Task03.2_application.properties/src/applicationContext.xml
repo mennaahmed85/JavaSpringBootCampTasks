@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    ">
+
+     <bean id="draw2dBean" class="com.task.bs.Draw2d">
+     </bean>
+
+    <bean id="draw3dBean" class="com.task.bs.Draw3d">
+    </bean>
+
+    <bean id="CircleShape"
+          class="com.task.bs.Circle"
+          scope="singleton">
+       <constructor-arg ref ="draw2dBean"/>
+       <constructor-arg ref ="draw3dBean"/>
+    </bean>
+
+    <bean id="SquareShape"
+          class="com.task.bs.Square"
+          scope="prototype">
+        <property name ="draw2dObj" ref="draw2dBean"/>
+        <property name ="draw3dObj" ref="draw3dBean"/>
+    </bean>
+
+
+    <bean id="init"
+          class="com.task.bs.DatabaseOperations"
+          init-method="connectToDatabase">
+    </bean>
+
+    <bean id="destroy"
+          class="com.task.bs.DatabaseOperations"
+          destroy-method="disconnectFromDatabase">
+    </bean>
+
+        </beans>
+
+
+
+
+
+
+
